@@ -3,7 +3,7 @@ import java.security.InvalidParameterException;
 
 public class Main {
 	private static int T_SUPPORT = 3;
-	private static double T_CONFIDENCE = 0.65;
+	private static double T_CONFIDENCE = 65;
 	
 	public static void main(String[] args) throws IOException {
 		// Only allowed arg lengths are 1 or 3

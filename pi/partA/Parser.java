@@ -18,16 +18,14 @@ public class Parser {
 		CallGraph cg = new CallGraph();
 		Node node = null;
 		
-		Boolean inNode = false;
+		boolean inNode = false;
 
 		while (line != null) {
 			// TODO: Should this be reworked into a rigorous regex matching?
 			if (line.startsWith("Call graph node for function")) {
-				//System.out.println("starter");
 				node = new Node(retrieveFunctionName(line));
 				inNode=true;
 			} else if (line.startsWith("  CS<0x")) {
-				//System.out.println("address add");
 				//can be "calls function" or "calls node"
 				if(inNode){
 					if(!line.contains("calls external node")){
@@ -43,7 +41,6 @@ public class Parser {
 				// No more information regarding the current working node
 				// add it to the call graph model.
 				if (node != null) {
-				//System.out.println("null function");
 					cg.addNode(node);
 					node = null;
 				}
@@ -62,7 +59,6 @@ public class Parser {
 	public String retrieveFunctionName(String line) {
 		int firstIndex = line.indexOf('\'');
 		int lastIndex = line.lastIndexOf('\'');
-		System.out.println("starts at "+firstIndex+" ends at "+lastIndex);
 		
 		return line.substring(firstIndex + 1, lastIndex);
 	}

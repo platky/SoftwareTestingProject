@@ -25,6 +25,13 @@ public class Node {
 	public boolean containsChild(String childName) {
 		return getChildren().contains(childName);
 	}
+	
+	public boolean containsPair(String child1, String child2){
+		if(getChildren().contains(child1)&& getChildren().contains(child2)){
+			return true;
+		}
+		return false;
+	}
 
 	public List<String> getChildren() {
 		return children;
