@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
 
 public class CallGraph {
 	// Assume no duplicate function name
@@ -14,7 +15,6 @@ public class CallGraph {
 	
 	Map<String, Integer> supportList_indiv = new HashMap<String, Integer>();
 	Map<Set<String>, Integer> supportList_pair = new HashMap<Set<String>, Integer>();
-	Map<String, Set<String>> bugList = new HashMap<String, Set<String>>();
 	
 	private int T_SUPPORT;
 	private double T_CONFIDENCE;
@@ -82,14 +82,14 @@ public class CallGraph {
 				int v2 = supportList_indiv.get(n2);
 			
 				//check first value
-				double conf1=(pairs.getValue()*100)/v1;
+				double conf1=((double)pairs.getValue()*100)/ (double)v1;
 				if(conf1>=this.T_CONFIDENCE){
 					//likely bug, run the location finder
 					bugLocator(n1, n1, n2, pairs.getValue(), conf1);
 				}
 				
 				//check second value
-				double conf2=(pairs.getValue()*100)/v2;
+				double conf2=((double)pairs.getValue()*100)/ (double)v2;
 				if(conf2>=this.T_CONFIDENCE){
 					//likely bug, run the location finder
 					bugLocator(n2, n1, n2, pairs.getValue(), conf2);
@@ -105,13 +105,21 @@ public class CallGraph {
 			if(!inPair){
 				if(fList.getValue().containsChild(fn)){
 					//likely bug here, post it!
+					DecimalFormat df = new DecimalFormat("0.00"); 
+					//output of pair needs to be alphabetical it seems
+					if(pair2.compareTo(pair1)<0){
+						String tmp = pair1;
+						pair1=pair2;
+						pair2=tmp;
+					}
 					System.out.println("bug: "+fn+" in "+fList.getKey()+", pair: ("+pair1+", "+pair2+"), support: "+
-					sup + ", confidence: "+conf+"%");
+					sup + ", confidence: "+df.format(conf)+"%");
 				}
 			}
 		}
 		
 	}
+	
 
 	
 	

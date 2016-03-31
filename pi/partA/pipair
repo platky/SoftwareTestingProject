@@ -1,4 +1,6 @@
 #!/bin/bash
 
-unset JAVA_TOOL_OPTIONS
-java -Xmx128m -Xms128m Main $@
+unset JAVA_TOOL_OPTION
+opt -print-callgraph $1 1>/dev/null 2>tmp.cg
+java -Xmx128m -Xms128m -cp .. Main tmp.cg $2 $3
+rm tmp.cg

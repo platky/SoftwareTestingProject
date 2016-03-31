@@ -21,6 +21,7 @@ public class Parser {
 		boolean inNode = false;
 
 		while (line != null) {
+			
 			// TODO: Should this be reworked into a rigorous regex matching?
 			if (line.startsWith("Call graph node for function")) {
 				node = new Node(retrieveFunctionName(line));

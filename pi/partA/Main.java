@@ -21,5 +21,6 @@ public class Main {
 		cg.setParams(T_SUPPORT, T_CONFIDENCE);
 
 		cg.evaluate();
+		
 	}
 }
