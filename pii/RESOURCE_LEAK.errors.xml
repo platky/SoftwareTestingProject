@@ -1,0 +1,85 @@
+<error>
+<domain>STATIC_JAVA</domain>
+<lang>Java</lang>
+<checker>RESOURCE_LEAK</checker>
+<file>/home/ejmcalis/Parser.java</file>
+<function>Parser.parse()</function>
+<score>100</score>
+<ordered>true</ordered>
+<event>
+<tag>new_resource</tag>
+<description>{CovLStrv2{{t{{0} creates a new resource.}{{code{new java.io.FileReader(fileName)}}}}}}</description>
+<line>15</line>
+</event>
+<event>
+<tag>var_assign</tag>
+<description>{CovLStrv2{{t{Assigning: {0} = resource returned from {1}.}{{code{br}}}{{code{new java.io.BufferedReader(new java.io.FileReader(fileName))}}}}}}</description>
+<line>15</line>
+</event>
+<event>
+<tag>noescape</tag>
+<description>{CovLStrv2{{t{Resource {0} is not closed or saved in {1}.}{{code{br}}}{{code{readLine}}}}}}</description>
+<line>16</line>
+</event>
+<event>
+<tag>cond_true</tag>
+<description>{CovLStrv2{{t{Condition {0}, taking true branch}{{code{line != null}}}}}}</description>
+<line>23</line>
+<path_event></path_event>
+</event>
+<event>
+<tag>cond_true</tag>
+<description>{CovLStrv2{{t{Condition {0}, taking true branch}{{code{line.startsWith(&quot;Call graph node for function&quot;)}}}}}}</description>
+<line>25</line>
+<path_event></path_event>
+</event>
+<event>
+<tag>if_fallthrough</tag>
+<description>{CovLStrv2{{t{Falling through to end of if statement}}}}</description>
+<line>28</line>
+<path_event>
+<jump>true</jump>
+<suppressible>true</suppressible>
+</path_event>
+</event>
+<event>
+<tag>if_end</tag>
+<description>{CovLStrv2{{t{End of if statement}}}}</description>
+<line>47</line>
+<path_event>
+<suppressible>true</suppressible>
+</path_event>
+</event>
+<event>
+<tag>noescape</tag>
+<description>{CovLStrv2{{t{Resource {0} is not closed or saved in {1}.}{{code{br}}}{{code{readLine}}}}}}</description>
+<line>51</line>
+</event>
+<event>
+<tag>throw_uncaught</tag>
+<description>{CovLStrv2{{t{Throwing {0} (or subclass) from call to {1}; exiting method with uncaught exception.}{{code{java.io.IOException}}}{{code{readLine}}}}}}</description>
+<line>51</line>
+<path_event>
+<jump>true</jump>
+<exception>true</exception>
+</path_event>
+</event>
+<event>
+<main>true</main>
+<tag>leaked_resource</tag>
+<description>{CovLStrv2{{t{Variable {0} going out of scope leaks the resource it refers to.}{{code{br}}}}}}</description>
+<line>51</line>
+</event>
+<extra>FileReader</extra>
+<subcategory>exceptional_path</subcategory>
+<typePropertiesGroup>
+<category>Exceptional resource leaks</category>
+<impact>Low</impact>
+<type>Resource leak on an exceptional path</type>
+<cwe>404</cwe>
+<localEffect>The system resource will not be reclaimed and reused, reducing the future availability of the resource.</localEffect>
+<longDescription>Leak of a system resource on an exception path (probably error handling)</longDescription>
+<qualityKind>true</qualityKind>
+<securityKind>true</securityKind>
+</typePropertiesGroup>
+</error>
